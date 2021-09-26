@@ -1,0 +1,8 @@
+app/code/local/LCB/NotifyStock
+app/design/adminhtml/default/default/layout/lcb_notifystock.xml
+app/design/frontend/base/default/layout/lcb_notifystock.xml
+app/design/frontend/base/default/template/notifystock
+app/etc/modules/LCB_NotifyStock.xml
+app/locale/pl_PL/LCB_NotifyStock.csv
+app/locale/pl_PL/template/email/notifystock.html
+app/locale/en_US/template/email/notifystock.html

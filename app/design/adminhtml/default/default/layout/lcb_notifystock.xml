@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <lcb_notifystock_adminhtml_subscriber_index>
+        <reference name="content">
+            <block type="lcb_notifystock/adminhtml_subscriber" name="notifystock_subscriber" />
+        </reference>
+    </lcb_notifystock_adminhtml_subscriber_index>
+</layout>

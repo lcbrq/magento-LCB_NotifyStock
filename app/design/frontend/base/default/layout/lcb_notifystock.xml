@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_logged_out>
+        <reference name="content">
+            <reference name="product.info">
+                <block type="lcb_notifystock/catalog_product_view" template="notifystock/catalog/product/view.phtml" name="notifystock" />
+                <reference name="alert.urls">
+                    <remove name="productalert.stock"/>
+                </reference>
+            </reference>
+        </reference>
+    </customer_logged_out>
+</layout>

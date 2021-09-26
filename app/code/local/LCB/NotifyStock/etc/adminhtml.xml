@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<adminhtml>
+    <menu>
+        <catalog>
+            <children>
+                <lcb_notifystock module="lcb_notifystock">
+                    <title>Notify Stock</title>
+                    <sort_order>100</sort_order>
+                    <action>lcb_notifystock/adminhtml_subscriber</action>
+                </lcb_notifystock>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <lcb_notifystock translate="title" module="lcb_notifystock">
+                        <title>Notify Stock</title>
+                        <sort_order>1000</sort_order>
+                    </lcb_notifystock>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</adminhtml>

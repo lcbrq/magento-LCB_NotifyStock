@@ -1,0 +1,47 @@
+<?php
+/**
+ * @var LCB_NotifyStock_Block_Catalog_Product_View $this
+ * @var Mage_Catalog_Model_Product $product
+ */
+$product = $this->getProduct();
+if (!$product) {
+    return;
+}
+?>
+
+<div class="notifystock field-row">
+    <h3>
+        <?php echo $this->__('Get notified when this product is back in stock'); ?>
+        <?php if ($subscribers = $this->getSubscribers()): ?>
+            (<?php echo $this->__('%s waiting', $subscribers); ?>)
+        <?php endif; ?>
+    </h3>
+    <input type="email" id="notifystock_email" name="email" class="input-text required-entry validate-email" placeholder="<?php echo $this->__('Email'); ?>">
+    <button onclick="subscribeNotifyStock('<?php echo $product->getSku(); ?>')" type="button"><?php echo $this->__('OK'); ?></button>
+    <div id="notifystock_result"></div>
+</div>
+
+<script type="text/javascript">
+    function subscribeNotifyStock(sku) {
+        if (Validation.validate(document.getElementById('notifystock_email'))) {
+            var email = $('notifystock_email').value;
+            new Ajax.Request('<?php echo $this->getUrl('notifystock/ajax/subscribe'); ?>', {
+                method: 'post',
+                parameters: {
+                    email: email,
+                    sku: sku
+                },
+                onSuccess: function successFunc(response) {
+                    if (200 == response.status) {
+                        var container = $('notifystock_result');
+                        var content = JSON.parse(response.responseText).message;
+                        container.update(content);
+                    }
+                },
+                onFailure: function (response) {
+                    alert("Call is failed" );
+                }
+            });
+        }
+    }
+</script>
