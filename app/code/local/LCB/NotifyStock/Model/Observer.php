@@ -19,10 +19,15 @@ class LCB_NotifyStock_Model_Observer
         $stockBack = $stockItem->getOrigData('is_in_stock') !== $stockItem->getIsInStock() && $stockItem->getIsInStock();
         $qtyBack = !$stockItem->getOrigData('qty') && $stockItem->getQty();
         if ($stockItem->getIsInStock() && $stockItem->getQty() && ($stockBack || $qtyBack)) {
-            $sku = $product->getSku();
-            $product = Mage::getModel('catalog/product');
-            $product->load($product->getIdBySku($sku));
+            if (!$product) {
+                $product = Mage::getModel('catalog/product')->load($stockItem->getProductId());
+            } else {
+                $sku = $product->getSku();
+                $product = Mage::getModel('catalog/product');
+                $product->load($product->getIdBySku($sku));
+            }
             if ($product->getId()) {
+                $sku = $product->getSku();
                 $subscribers = Mage::getModel('lcb_notifystock/subscriber')->getCollection()
                     ->addFieldToFilter('sku', $sku);
                 foreach ($subscribers as $subscriber) {
